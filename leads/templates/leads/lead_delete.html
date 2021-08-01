@@ -7,22 +7,17 @@
         <h2 class="text-sm title-font text-gray-500 tracking-widest">LEAD</h2>
         <h1 class="text-gray-900 text-3xl title-font font-medium mb-4">{{lead.first_name}} {{lead.last_name}}</h1>
         <div class="flex mb-4">
-          <a href="{% url 'lead-detail' lead.pk %}"
-            class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Overrview</a>
-          <a class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Reviews</a>
-          <a href="{% url 'lead-update' lead.pk %}"
-            class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">Update</a>
+          <a href="{% url 'lead-list' %}"
+            class="flex-grow border-b-2 border-gray-300 py-2 text-lg px-1">Go back lead list</a>
+          <a href="#"
+            class="flex-grow text-indigo-500 border-b-2 border-indigo-500 py-2 text-lg px-1">Delete</a>
         </div>
         <div class="relative mb-4">
           <form method="POST">
             {% csrf_token %}
             {{form.as_p }}
             <button
-              class="text-white bg-green-500 border-0 py-2 px-6 focus:outline-none hover:bg-green-600 rounded text-lg"
-              type="submit">update</button>
-            <button
-              class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg"><a
-                href="{% url 'lead-delete' lead.pk %}">Delete</a></button>
+              class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg">Delete</button>
           </form>
         </div>
         <!-- <div class="flex">
@@ -34,3 +29,21 @@
   </div>
 </section>
 {% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+<a href="{% url 'lead-list' %}">go back to leads</a>
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p }}
+        <button class="text-white bg-red-500 border-0 py-2 px-6 focus:outline-none hover:bg-red-600 rounded text-lg" type="submit">Delete</button>
+    </form>

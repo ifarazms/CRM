@@ -13,12 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+# from crm.settings import STATIC_ROOT, STATIC_URL, DEBUG
 from django.contrib import admin
 from django.urls import path, include
-from leads.views import landing_page
+from leads.views import LandingPageView, SignupView
+from django.conf.urls.static import static
+from django.conf  import settings
+from django.contrib.auth.views import LoginView, LogoutView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',landing_page, name="landing-page"),
+    path('',LandingPageView.as_view(), name="landing-page"),
+    path('login/',LoginView.as_view(), name="login"),
+    path('signup/',SignupView.as_view(), name="signup"),
+    path('logout/',LogoutView.as_view(), name="logout"),
     path('leads/', include('leads.urls'), name="leads"),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    
